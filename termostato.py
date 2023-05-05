@@ -8,7 +8,7 @@ class Termostato:
     """ Clase que representa el objeto termostato y su funcionamiento."""
 
     def __init__(self, input_temperatura: float, acciones: list, costes: list, estados: list):
-        self.temp_usuario = input_temperatura
+        self.__temp_usuario = input_temperatura
         self.acciones = acciones
         self.costes = costes
         self.estados = estados
@@ -43,7 +43,7 @@ class Termostato:
                         + Subir medio grado la temperatura: indice 0.
                         + Subir un grado la temperatura: indice 1.
                         + Bajar medio grado la temperatura: indice 2.
-                        + Bajar un grado la temperatura: indice 3.
+                        + Mantener la temperatura: indice 3.
 
                 - Ejemplo:
                     Con la consulta "self.probabilidades["encender"][18][0]" se estaría revisando
@@ -74,13 +74,14 @@ class Termostato:
             Se utiliza la organización mencionada anteriormente para añadir la probabilidad.
             Los valores se tratan como enteros, asumiendo que son sobre 100.
         """
-        efectos = ["+0.5", "+1", "-0.5", "-1"]
+        efectos = ["0.5", "1", "-0.5", "0"]
 
-        if accion not in self.acciones or estado not in range(16, 26) or efecto not in efectos \
+        if accion not in self.acciones or estado not in self.estados or efecto not in efectos \
                 or valor not in range(0, 101):
             return False
-
+        print(efectos.index(efecto))
         self.probabilidades[accion][estado][efectos.index(efecto)] = valor
+
         return True
 
     def calcular_camino_optimo(self):
@@ -94,12 +95,13 @@ class Termostato:
 
         while estado_actual != self.temp_usuario:
             accion = acciones_optimas[self.estados.index(estado_actual)]
-            probabilidades = self.probabilidades[accion][estado_actual]
+            probabilidades = self.probabilidades[self.acciones[accion]][estado_actual]
             lista_probs = []
 
             for i in range(4):
                 lista_probs += [i for j in range(probabilidades[i])]
 
+            print(lista_probs,probabilidades)
             indice = random.choice(lista_probs)
             if indice == 0:
                 estado_actual += 0.5
@@ -108,7 +110,7 @@ class Termostato:
             elif indice == 2:
                 estado_actual -= 0.5
             else:
-                estado_actual -= 1
+                estado_actual -= 0
 
             acciones_camino.append(accion)
 
@@ -194,27 +196,26 @@ class Termostato:
     def __calcular_formula_bellman(self, estado: float, action: str,
                                    valores_anteriores: list) -> float:
         """Esta función aplica la formula de Bellman a un estado en específico."""
+        result = 0
         if estado != self.temp_real:
-            result = 0
             result += self.costes[self.acciones.index(action)]
             for prob in self.probabilidades[action][estado]:
                 if self.probabilidades[action][estado].index(prob) == 0:
-                    result += prob / 100 * valores_anteriores[self.estados.index(estado + 0.5)]
+                    result += prob / 100 * valores_anteriores[self.estados.index(estado + 0.5)] if estado != 25 else 0
                 elif self.probabilidades[action][estado].index(prob) == 1:
-                    result += prob / 100 * valores_anteriores[self.estados.index(estado + 1)]
+                    result += prob / 100 * valores_anteriores[self.estados.index(estado + 1)] if estado < 24.5 else 0
                 elif self.probabilidades[action][estado].index(prob) == 2:
-                    result += prob / 100 * valores_anteriores[self.estados.index(estado - 0.5)]
+                    result += prob / 100 * valores_anteriores[self.estados.index(estado - 0.5)] if estado != 16 else 0
                 else:
-                    result += prob / 100 * valores_anteriores[self.estados.index(estado - 1)]
+                    result += prob / 100 * valores_anteriores[self.estados.index(estado)]
 
-            return result
+        return result
 
-        return 0
 
     @property
     def temp_usuario(self):
         """Getter para el atributo temp_usuario."""
-        return self.temp_usuario
+        return self.__temp_usuario
 
     @temp_usuario.setter
     def temp_usuario(self, valor):
