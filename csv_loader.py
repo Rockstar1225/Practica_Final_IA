@@ -27,4 +27,4 @@ class CSVloader:
         if estado_inicial not in self.indices or estado_final not in self.indices:
             raise ValueError("Los estados de localización no son los correctos!!!")
 
-        return self.contenido[self.indices.index(estado_inicial)][self.indices.index(estado_final)]
+        return int(self.contenido[self.indices.index(estado_inicial)][self.indices.index(estado_final)])

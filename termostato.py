@@ -55,7 +55,7 @@ class Termostato:
         for accion in self.acciones:
             self.probabilidades[accion] = {}
             for i in self.estados:
-                self.probabilidades[accion][i] = [0, 0, 0, 0]
+                self.probabilidades[accion][str(i)] = [0, 0, 0, 0]
 
     def comprobar_parametros(self) -> bool:
         """Función que comprueba que los parámetros de la istancia se hayan puesto correctamente."""
@@ -68,7 +68,7 @@ class Termostato:
 
         return False
 
-    def add_probabilidad(self, accion: str, estado: float, efecto: str, valor: int) -> bool:
+    def add_probabilidad(self, accion: str, estado: int | float, efecto: str, valor: int) -> bool:
         """
             Función que añade una probabilidad al termostato de cambiar de estado.
             Se utiliza la organización mencionada anteriormente para añadir la probabilidad.
@@ -76,11 +76,10 @@ class Termostato:
         """
         efectos = ["0.5", "1", "-0.5", "0"]
 
-        if accion not in self.acciones or estado not in self.estados or efecto not in efectos \
-                or valor not in range(0, 101):
+        if (accion not in self.acciones) or (int(estado) not in self.estados) or (efecto not in efectos) \
+                or (valor not in range(101)):
             return False
-        print(efectos.index(efecto))
-        self.probabilidades[accion][estado][efectos.index(efecto)] = valor
+        self.probabilidades[accion][str(estado)][efectos.index(efecto)] = valor
 
         return True
 
@@ -94,14 +93,14 @@ class Termostato:
         estado_actual = self.temp_real
 
         while estado_actual != self.temp_usuario:
-            accion = acciones_optimas[self.estados.index(estado_actual)]
-            probabilidades = self.probabilidades[self.acciones[accion]][estado_actual]
+            accion = acciones_optimas[self.estados.index(int(estado_actual))]
+            probabilidades = self.probabilidades[self.acciones[int(accion)]][str(int(estado_actual))]
             lista_probs = []
 
             for i in range(4):
                 lista_probs += [i for j in range(probabilidades[i])]
 
-            print(lista_probs,probabilidades)
+            # print(lista_probs,len(lista_probs),probabilidades)
             indice = random.choice(lista_probs)
             if indice == 0:
                 estado_actual += 0.5
@@ -112,7 +111,7 @@ class Termostato:
             else:
                 estado_actual -= 0
 
-            acciones_camino.append(accion)
+            acciones_camino.append(int(accion))
 
         return acciones_camino
 
@@ -199,18 +198,17 @@ class Termostato:
         result = 0
         if estado != self.temp_real:
             result += self.costes[self.acciones.index(action)]
-            for prob in self.probabilidades[action][estado]:
-                if self.probabilidades[action][estado].index(prob) == 0:
+            for prob in self.probabilidades[action][str(estado)]:
+                if self.probabilidades[action][str(estado)].index(prob) == 0:
                     result += prob / 100 * valores_anteriores[self.estados.index(estado + 0.5)] if estado != 25 else 0
-                elif self.probabilidades[action][estado].index(prob) == 1:
+                elif self.probabilidades[action][str(estado)].index(prob) == 1:
                     result += prob / 100 * valores_anteriores[self.estados.index(estado + 1)] if estado < 24.5 else 0
-                elif self.probabilidades[action][estado].index(prob) == 2:
+                elif self.probabilidades[action][str(estado)].index(prob) == 2:
                     result += prob / 100 * valores_anteriores[self.estados.index(estado - 0.5)] if estado != 16 else 0
                 else:
                     result += prob / 100 * valores_anteriores[self.estados.index(estado)]
 
         return result
-
 
     @property
     def temp_usuario(self):
