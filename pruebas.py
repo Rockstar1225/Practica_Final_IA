@@ -1,5 +1,6 @@
 import os
 import unittest
+import platform
 
 from csv_loader import CSVloader
 from termostato import Termostato
@@ -25,11 +26,13 @@ class Pruebas(unittest.TestCase):
         estados = [16, 16.5, 17, 17.5, 18, 18.5, 19, 19.5, 20, 20.5, 21, 21.5, 22, 22.5, 23, 23.5, 24, 24.5, 25]
         acciones = ["encender", "apagar"]
 
-        termostato = Termostato(22, acciones, [1, 0], estados)
+        termostato = Termostato(22, acciones, [1, 2], estados)
         loader = CSVloader(estados)
-        for file in os.listdir(os.getcwd() + "\\Probabilidades Condicionales"):
+        prev = "/" if platform.system() == "Linux" else "\\"
 
-            loader.load_csv("\\Probabilidades Condicionales\\" + file)
+        for file in os.listdir(os.getcwd() + prev + "Probabilidades Condicionales"):
+
+            loader.load_csv(prev + "Probabilidades Condicionales"+ prev + file)
             print(loader.contenido)
             for i in estados:
                 if i == 16:
@@ -54,6 +57,11 @@ class Pruebas(unittest.TestCase):
             loader.contenido = []
 
         print(termostato.probabilidades)
+        print("Temperatura ingresada: ",termostato.temp_usuario)
+        print("Temperatura real: ",termostato.temp_real)
+        print("Acciones Optimas: ",termostato.encontrar_politica_optima()[1])
+        print("Camino Optimo: ",termostato.calcular_camino_optimo())
+        calculo = [acciones[i] for i in termostato.calcular_camino_optimo()]
         result = []
 
-        return self.assertEqual(result,termostato.calcular_camino_optimo(), "Los caminos no son iguales!!!")
+        return self.assertEqual(result,calculo, "Los caminos no son iguales!!!")

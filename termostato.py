@@ -86,9 +86,9 @@ class Termostato:
     def calcular_camino_optimo(self):
         """
             Función que simula un recorrido por los estados hasta llegar al deseado.
-            Retorna las acciones que ha realizado.
+            Retorna el indice de las acciones que se han realizado de acuerdo a una política óptima.
         """
-        acciones_optimas = self.encontrar_politica_optima()[1]
+        acciones_optimas = self.encontrar_politica_optima()[0]
         acciones_camino = []
         estado_actual = self.temp_real
 
