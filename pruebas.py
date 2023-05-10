@@ -49,8 +49,9 @@ class Pruebas(unittest.TestCase):
         print("Temperatura real: ",termostato.temp_real)
         print("Costes de Estados Optimos: ",termostato.encontrar_politica_optima()[1])
         print("Acciones Optimas: ",termostato.encontrar_politica_optima()[0])
-        print("Camino Optimo: ",termostato.calcular_camino_optimo())
-        calculo = [self.acciones[i] for i in termostato.calcular_camino_optimo()]
+        camino = termostato.calcular_camino_optimo()
+        print("Camino Optimo: ",camino)
+        calculo = [self.acciones[i] for i in camino]
         result = []
 
         return self.assertEqual(result,calculo, "Los caminos no son iguales!!!")
@@ -88,12 +89,13 @@ class Pruebas(unittest.TestCase):
             loader.contenido = []
 
         print(termostato.probabilidades)
-        print("Temperatura ingresada: ",termostato.temp_usuario)
-        print("Temperatura real: ",termostato.temp_real)
-        print("Costes de Estados Optimos: ",termostato.encontrar_politica_optima()[1])
-        print("Acciones Optimas: ",termostato.encontrar_politica_optima()[0])
-        print("Camino Optimo: ",termostato.calcular_camino_optimo())
-        calculo = [self.acciones[i] for i in termostato.calcular_camino_optimo()]
+        print("Temperatura ingresada: ", termostato.temp_usuario)
+        print("Temperatura real: ", termostato.temp_real)
+        print("Costes de Estados Optimos: ", termostato.encontrar_politica_optima()[1])
+        print("Acciones Optimas: ", termostato.encontrar_politica_optima()[0])
+        camino = termostato.calcular_camino_optimo()
+        print("Camino Optimo: ", camino)
+        calculo = [self.acciones[i] for i in camino]
         result = []
 
         return self.assertEqual(result,calculo, "Los caminos no son iguales!!!")
@@ -131,12 +133,13 @@ class Pruebas(unittest.TestCase):
             loader.contenido = []
 
         print(termostato.probabilidades)
-        print("Temperatura ingresada: ",termostato.temp_usuario)
-        print("Temperatura real: ",termostato.temp_real)
-        print("Costes de Estados Optimos: ",termostato.encontrar_politica_optima()[1])
-        print("Acciones Optimas: ",termostato.encontrar_politica_optima()[0])
-        print("Camino Optimo: ",termostato.calcular_camino_optimo())
-        calculo = [self.acciones[i] for i in termostato.calcular_camino_optimo()]
+        print("Temperatura ingresada: ", termostato.temp_usuario)
+        print("Temperatura real: ", termostato.temp_real)
+        print("Costes de Estados Optimos: ", termostato.encontrar_politica_optima()[1])
+        print("Acciones Optimas: ", termostato.encontrar_politica_optima()[0])
+        camino = termostato.calcular_camino_optimo()
+        print("Camino Optimo: ", camino)
+        calculo = [self.acciones[i] for i in camino]
         result = []
 
         return self.assertEqual(result,calculo, "Los caminos no son iguales!!!")
@@ -174,12 +177,13 @@ class Pruebas(unittest.TestCase):
             loader.contenido = []
 
         print(termostato.probabilidades)
-        print("Temperatura ingresada: ",termostato.temp_usuario)
-        print("Temperatura real: ",termostato.temp_real)
-        print("Costes de Estados Optimos: ",termostato.encontrar_politica_optima()[1])
-        print("Acciones Optimas: ",termostato.encontrar_politica_optima()[0])
-        print("Camino Optimo: ",termostato.calcular_camino_optimo())
-        calculo = [self.acciones[i] for i in termostato.calcular_camino_optimo()]
+        print("Temperatura ingresada: ", termostato.temp_usuario)
+        print("Temperatura real: ", termostato.temp_real)
+        print("Costes de Estados Optimos: ", termostato.encontrar_politica_optima()[1])
+        print("Acciones Optimas: ", termostato.encontrar_politica_optima()[0])
+        camino = termostato.calcular_camino_optimo()
+        print("Camino Optimo: ", camino)
+        calculo = [self.acciones[i] for i in camino]
         result = []
 
         return self.assertEqual(result,calculo, "Los caminos no son iguales!!!")
@@ -217,12 +221,13 @@ class Pruebas(unittest.TestCase):
             loader.contenido = []
 
         print(termostato.probabilidades)
-        print("Temperatura ingresada: ",termostato.temp_usuario)
-        print("Temperatura real: ",termostato.temp_real)
-        print("Costes de Estados Optimos: ",termostato.encontrar_politica_optima()[1])
-        print("Acciones Optimas: ",termostato.encontrar_politica_optima()[0])
-        print("Camino Optimo: ",termostato.calcular_camino_optimo())
-        calculo = [self.acciones[i] for i in termostato.calcular_camino_optimo()]
+        print("Temperatura ingresada: ", termostato.temp_usuario)
+        print("Temperatura real: ", termostato.temp_real)
+        print("Costes de Estados Optimos: ", termostato.encontrar_politica_optima()[1])
+        print("Acciones Optimas: ", termostato.encontrar_politica_optima()[0])
+        camino = termostato.calcular_camino_optimo()
+        print("Camino Optimo: ", camino)
+        calculo = [self.acciones[i] for i in camino]
         result = []
 
         return self.assertEqual(result,calculo, "Los caminos no son iguales!!!")
