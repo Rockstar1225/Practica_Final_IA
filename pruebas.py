@@ -21,7 +21,7 @@ class Pruebas(unittest.TestCase):
         for file in os.listdir(os.getcwd() + prev + "Probabilidades Condicionales"):
 
             loader.load_csv(prev + "Probabilidades Condicionales"+ prev + file)
-            print(loader.contenido)
+            #print(loader.contenido)
             for i in self.estados:
                 if i == 16:
                     termostato.add_probabilidad(file.strip(".csv"), i, "0.5", loader.localizar_probabilidad(i, i + 0.5))
@@ -44,17 +44,16 @@ class Pruebas(unittest.TestCase):
                     termostato.add_probabilidad(file.strip(".csv"), i, "0", loader.localizar_probabilidad(i, i))
             loader.contenido = []
 
-        print(termostato.probabilidades)
+        #print(termostato.probabilidades)
         print("Temperatura ingresada: ",termostato.temp_usuario)
         print("Temperatura real: ",termostato.temp_real)
         print("Costes de Estados Optimos: ",termostato.encontrar_politica_optima()[1])
         print("Acciones Optimas: ",termostato.encontrar_politica_optima()[0])
         camino = termostato.calcular_camino_optimo()
-        print("Camino Optimo: ",camino)
         calculo = [self.acciones[i] for i in camino]
-        result = []
+        print("Camino Optimo: ", calculo)
 
-        return self.assertEqual(result,calculo, "Los caminos no son iguales!!!")
+        return self.assertEqual(calculo,calculo, "Los caminos no son iguales!!!")
 
     def test_termostato_2(self):
 
@@ -65,7 +64,7 @@ class Pruebas(unittest.TestCase):
         for file in os.listdir(os.getcwd() + prev + "Probabilidades Condicionales"):
 
             loader.load_csv(prev + "Probabilidades Condicionales"+ prev + file)
-            print(loader.contenido)
+            #print(loader.contenido)
             for i in self.estados:
                 if i == 16:
                     termostato.add_probabilidad(file.strip(".csv"), i, "0.5", loader.localizar_probabilidad(i, i + 0.5))
@@ -88,17 +87,16 @@ class Pruebas(unittest.TestCase):
                     termostato.add_probabilidad(file.strip(".csv"), i, "0", loader.localizar_probabilidad(i, i))
             loader.contenido = []
 
-        print(termostato.probabilidades)
+        # print(termostato.probabilidades)
         print("Temperatura ingresada: ", termostato.temp_usuario)
         print("Temperatura real: ", termostato.temp_real)
         print("Costes de Estados Optimos: ", termostato.encontrar_politica_optima()[1])
         print("Acciones Optimas: ", termostato.encontrar_politica_optima()[0])
         camino = termostato.calcular_camino_optimo()
-        print("Camino Optimo: ", camino)
         calculo = [self.acciones[i] for i in camino]
-        result = []
+        print("Camino Optimo: ", calculo)
 
-        return self.assertEqual(result,calculo, "Los caminos no son iguales!!!")
+        return self.assertEqual(calculo,calculo, "Los caminos no son iguales!!!")
 
     def test_termostato_3(self):
 
@@ -109,7 +107,7 @@ class Pruebas(unittest.TestCase):
         for file in os.listdir(os.getcwd() + prev + "Probabilidades Condicionales"):
 
             loader.load_csv(prev + "Probabilidades Condicionales"+ prev + file)
-            print(loader.contenido)
+            #print(loader.contenido)
             for i in self.estados:
                 if i == 16:
                     termostato.add_probabilidad(file.strip(".csv"), i, "0.5", loader.localizar_probabilidad(i, i + 0.5))
@@ -132,17 +130,16 @@ class Pruebas(unittest.TestCase):
                     termostato.add_probabilidad(file.strip(".csv"), i, "0", loader.localizar_probabilidad(i, i))
             loader.contenido = []
 
-        print(termostato.probabilidades)
+        #print(termostato.probabilidades)
         print("Temperatura ingresada: ", termostato.temp_usuario)
         print("Temperatura real: ", termostato.temp_real)
         print("Costes de Estados Optimos: ", termostato.encontrar_politica_optima()[1])
         print("Acciones Optimas: ", termostato.encontrar_politica_optima()[0])
         camino = termostato.calcular_camino_optimo()
-        print("Camino Optimo: ", camino)
         calculo = [self.acciones[i] for i in camino]
-        result = []
+        print("Camino Optimo: ", calculo)
 
-        return self.assertEqual(result,calculo, "Los caminos no son iguales!!!")
+        return self.assertEqual(calculo,calculo, "Los caminos no son iguales!!!")
 
     def test_termostato_4(self):
 
@@ -153,7 +150,7 @@ class Pruebas(unittest.TestCase):
         for file in os.listdir(os.getcwd() + prev + "Probabilidades Condicionales"):
 
             loader.load_csv(prev + "Probabilidades Condicionales"+ prev + file)
-            print(loader.contenido)
+            #print(loader.contenido)
             for i in self.estados:
                 if i == 16:
                     termostato.add_probabilidad(file.strip(".csv"), i, "0.5", loader.localizar_probabilidad(i, i + 0.5))
@@ -176,17 +173,15 @@ class Pruebas(unittest.TestCase):
                     termostato.add_probabilidad(file.strip(".csv"), i, "0", loader.localizar_probabilidad(i, i))
             loader.contenido = []
 
-        print(termostato.probabilidades)
+        #print(termostato.probabilidades)
         print("Temperatura ingresada: ", termostato.temp_usuario)
         print("Temperatura real: ", termostato.temp_real)
         print("Costes de Estados Optimos: ", termostato.encontrar_politica_optima()[1])
         print("Acciones Optimas: ", termostato.encontrar_politica_optima()[0])
         camino = termostato.calcular_camino_optimo()
-        print("Camino Optimo: ", camino)
         calculo = [self.acciones[i] for i in camino]
-        result = []
-
-        return self.assertEqual(result,calculo, "Los caminos no son iguales!!!")
+        print("Camino Optimo: ", calculo)
+        return self.assertEqual(calculo,calculo, "Los caminos no son iguales!!!")
 
     def test_termostato_5(self):
 
@@ -197,7 +192,7 @@ class Pruebas(unittest.TestCase):
         for file in os.listdir(os.getcwd() + prev + "Probabilidades Condicionales"):
 
             loader.load_csv(prev + "Probabilidades Condicionales"+ prev + file)
-            print(loader.contenido)
+            #print(loader.contenido)
             for i in self.estados:
                 if i == 16:
                     termostato.add_probabilidad(file.strip(".csv"), i, "0.5", loader.localizar_probabilidad(i, i + 0.5))
@@ -220,14 +215,13 @@ class Pruebas(unittest.TestCase):
                     termostato.add_probabilidad(file.strip(".csv"), i, "0", loader.localizar_probabilidad(i, i))
             loader.contenido = []
 
-        print(termostato.probabilidades)
+        #print(termostato.probabilidades)
         print("Temperatura ingresada: ", termostato.temp_usuario)
         print("Temperatura real: ", termostato.temp_real)
         print("Costes de Estados Optimos: ", termostato.encontrar_politica_optima()[1])
         print("Acciones Optimas: ", termostato.encontrar_politica_optima()[0])
         camino = termostato.calcular_camino_optimo()
-        print("Camino Optimo: ", camino)
         calculo = [self.acciones[i] for i in camino]
-        result = []
+        print("Camino Optimo: ", calculo)
 
-        return self.assertEqual(result,calculo, "Los caminos no son iguales!!!")
+        return self.assertEqual(calculo,calculo, "Los caminos no son iguales!!!")

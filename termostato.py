@@ -91,24 +91,26 @@ class Termostato:
         acciones_optimas = self.encontrar_politica_optima()[0]
         acciones_camino = []
         estado_actual = self.temp_real
-
-        while estado_actual != self.temp_usuario:
+        iteracion = 0
+        while estado_actual != self.temp_usuario and iteracion < 900:
+            iteracion += 1
             accion = acciones_optimas[self.estados.index(int(estado_actual))]
             probabilidades = self.probabilidades[self.acciones[int(accion)]][str(int(estado_actual))]
-            lista_probs = []
+            list_probs = []
+
 
             for i in range(4):
-                lista_probs += [i for j in range(probabilidades[i])]
+                list_probs += [i for j in range(probabilidades[i])]
 
-            # print(lista_probs,len(lista_probs),probabilidades)
-            indice = random.choice(lista_probs)
+            #print(list_probs,len(list_probs),probabilidades)
+            indice = random.choice(list_probs)
             if indice == 0:
                 estado_actual += 0.5
             elif indice == 1:
                 estado_actual += 1
             elif indice == 2:
                 estado_actual -= 0.5
-            else:
+            elif indice == 3:
                 estado_actual -= 0
 
             acciones_camino.append(int(accion))
